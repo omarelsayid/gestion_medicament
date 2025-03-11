@@ -1,0 +1,2 @@
+C:/gestion_medicament/android/app/.cxx/Debug/3ta264u4/x86_64/CMakeFiles/edit_cache.dir
+C:/gestion_medicament/android/app/.cxx/Debug/3ta264u4/x86_64/CMakeFiles/rebuild_cache.dir

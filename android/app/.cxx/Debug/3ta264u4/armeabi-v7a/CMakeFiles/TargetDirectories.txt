@@ -1,0 +1,2 @@
+C:/gestion_medicament/android/app/.cxx/Debug/3ta264u4/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/gestion_medicament/android/app/.cxx/Debug/3ta264u4/armeabi-v7a/CMakeFiles/rebuild_cache.dir
