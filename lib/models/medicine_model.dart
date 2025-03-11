@@ -3,7 +3,6 @@ class Medicine {
   String name;
   String dosage;
   String frequency;
-  String startDate;
   String endDate;
 
   Medicine({
@@ -11,7 +10,6 @@ class Medicine {
     required this.name,
     required this.dosage,
     required this.frequency,
-    required this.startDate,
     required this.endDate,
   });
 
@@ -21,7 +19,6 @@ class Medicine {
       'name': name,
       'dosage': dosage,
       'frequency': frequency,
-      'startDate': startDate,
       'endDate': endDate,
     };
   }
@@ -32,7 +29,6 @@ class Medicine {
       name: map['name'],
       dosage: map['dosage'],
       frequency: map['frequency'],
-      startDate: map['startDate'],
       endDate: map['endDate'],
     );
   }

@@ -3,12 +3,13 @@ import 'medicine_list_screen.dart';
 import 'appointment_list_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super. key});
-  @override
+  const HomeScreen({super.key});
+
+   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gestion de Medicament et Rendez-vous'), // عنوان الصفحة
+        title: Text('My Reminder'),
       ),
       body: Center(
         child: Column(
