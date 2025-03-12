@@ -53,34 +53,5 @@ class DatabaseHelper {
 ''');
   }
 
-  insertData(String sql) async {
-    // here we use the get db function
-    Database mydb = await database;
-    //Executes a raw SQL INSERT query and returns the last inserted row ID.
-    int response = await mydb.rawInsert(sql);
-    return response;
-  }
 
-  updateData(String sql) async {
-    // here we use the get db function
-    Database? mydb = await database;
-    //Executes a raw SQL INSERT query and returns the last inserted row ID.
-    int response = await mydb.rawUpdate(sql);
-    return response;
-  }
-
-  deleteData(String sql) async {
-    // here we use the get db function
-    Database? mydb = await database;
-    //Executes a raw SQL INSERT query and returns the last inserted row ID.
-    int response = await mydb.rawDelete(sql);
-    return response;
-  }
-
-  selectData(String sql) async {
-    // here we use the get db function
-    Database? mydb = await database;
-    List<Map<String, Object?>> response = await mydb.rawQuery(sql);
-    return response;
-  }
 }
