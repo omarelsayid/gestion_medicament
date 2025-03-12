@@ -40,7 +40,7 @@ class DatabaseHelper {
         endDate TEXT
       )
     ''');
-  
+
     await db.execute('''
   CREATE TABLE appointments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,6 +51,4 @@ class DatabaseHelper {
   )
 ''');
   }
-
-
 }

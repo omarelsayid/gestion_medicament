@@ -4,22 +4,30 @@ import '../models/medicine_model.dart';
 import '../providers/medicine_provider.dart';
 
 class AddMedicineScreen extends StatelessWidget {
-  // إزالة const من المُنشئ
   AddMedicineScreen({super.key});
-
+  
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _dosageController = TextEditingController();
   final _frequencyController = TextEditingController();
-  final _startDateController = TextEditingController();
   final _endDateController = TextEditingController();
+
+  Future<void> _selectEndDate(BuildContext context) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+    if (pickedDate != null) {
+      _endDateController.text = pickedDate.toLocal().toString().split(' ')[0];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Medicine'),
-      ),
+      appBar: AppBar(title: const Text('Add Medicine')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -29,57 +37,40 @@ class AddMedicineScreen extends StatelessWidget {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name';
-                  }
-                  return null;
-                },
+                validator: (value) => value!.isEmpty ? 'Please enter a name' : null,
               ),
               TextFormField(
                 controller: _dosageController,
                 decoration: const InputDecoration(labelText: 'Dosage'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a dosage';
-                  }
-                  return null;
-                },
+                validator: (value) => value!.isEmpty ? 'Please enter a dosage' : null,
               ),
               TextFormField(
                 controller: _frequencyController,
                 decoration: const InputDecoration(labelText: 'Frequency'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a frequency';
-                  }
-                  return null;
-                },
+                validator: (value) => value!.isEmpty ? 'Please enter a frequency' : null,
               ),
-
               TextFormField(
                 controller: _endDateController,
-                decoration: const InputDecoration(labelText: 'End Date'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter an end date';
-                  }
-                  return null;
-                },
+                decoration: const InputDecoration(
+                  labelText: 'End Date',
+                  suffixIcon: Icon(Icons.calendar_today),
+                ),
+                readOnly: true,
+                onTap: () => _selectEndDate(context),
+                validator: (value) => value!.isEmpty ? 'Please enter an end date' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     Medicine medicine = Medicine(
                       name: _nameController.text,
                       dosage: _dosageController.text,
                       frequency: _frequencyController.text,
-                      startDate: _startDateController.text,
                       endDate: _endDateController.text,
                     );
-                    Provider.of<MedicineProvider>(context, listen: false)
-                        .addMedicine(medicine);
+
+                    Provider.of<MedicineProvider>(context, listen: false).addMedicine(medicine);
                     Navigator.pop(context);
                   }
                 },

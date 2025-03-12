@@ -1,22 +1,20 @@
 import 'package:sqflite/sqflite.dart';
-import '../database_helper.dart';
 import '../models/medicine_model.dart';
-
+import '../database_helper.dart';
 
 class MedicineRepository {
   final DatabaseHelper _databaseHelper = DatabaseHelper();
 
   Future<int> insertMedicine(Medicine medicine) async {
     Database db = await _databaseHelper.database;
-    return await db.insert('medicines', medicine.toMap());
+    return await db.insert('medicines', medicine.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
   Future<List<Medicine>> getAllMedicines() async {
     Database db = await _databaseHelper.database;
     List<Map<String, dynamic>> maps = await db.query('medicines');
-    return List.generate(maps.length, (i) {
-      return Medicine.fromMap(maps[i]);
-    });
+    return maps.map((map) => Medicine.fromMap(map)).toList();
   }
 
   Future<int> updateMedicine(Medicine medicine) async {

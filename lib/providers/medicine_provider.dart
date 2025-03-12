@@ -3,8 +3,8 @@ import '../models/medicine_model.dart';
 import '../repositories/medicine_repository.dart';
 
 class MedicineProvider with ChangeNotifier {
-  final MedicineRepository _repository = MedicineRepository();
   List<Medicine> _medicines = [];
+  final MedicineRepository _repository = MedicineRepository();
 
   List<Medicine> get medicines => _medicines;
 
