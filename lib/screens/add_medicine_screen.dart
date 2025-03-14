@@ -37,17 +37,20 @@ class AddMedicineScreen extends StatelessWidget {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) => value!.isEmpty ? 'Please enter a name' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Please enter a name' : null,
               ),
               TextFormField(
                 controller: _dosageController,
                 decoration: const InputDecoration(labelText: 'Dosage'),
-                validator: (value) => value!.isEmpty ? 'Please enter a dosage' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Please enter a dosage' : null,
               ),
               TextFormField(
                 controller: _frequencyController,
                 decoration: const InputDecoration(labelText: 'Frequency'),
-                validator: (value) => value!.isEmpty ? 'Please enter a frequency' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Please enter a frequency' : null,
               ),
               TextFormField(
                 controller: _endDateController,
@@ -57,7 +60,8 @@ class AddMedicineScreen extends StatelessWidget {
                 ),
                 readOnly: true,
                 onTap: () => _selectEndDate(context),
-                validator: (value) => value!.isEmpty ? 'Please enter an end date' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Please enter an end date' : null,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -70,8 +74,8 @@ class AddMedicineScreen extends StatelessWidget {
                       endDate: _endDateController.text,
                     );
 
-
-                    Provider.of<MedicineProvider>(context, listen: false).addMedicine(medicine);
+                    Provider.of<MedicineProvider>(context, listen: false)
+                        .addMedicine(medicine);
                     Navigator.pop(context);
                   }
                 },

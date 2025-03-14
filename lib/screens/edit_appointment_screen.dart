@@ -67,51 +67,51 @@ class _EditAppointmentScreenState extends State<EditAppointmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit Appointment')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                  controller: _doctorNameController,
-                  decoration: const InputDecoration(labelText: 'Doctor Name')),
-              TextFormField(
-                  controller: _dateController,
-                  decoration: const InputDecoration(labelText: 'Date'),
-                  readOnly: true,
-                  onTap: () => _selectDate(context)),
-              TextFormField(
-                  controller: _timeController,
-                  decoration: const InputDecoration(labelText: 'Time'),
-                  readOnly: true,
-                  onTap: () => _selectTime(context)),
-              TextFormField(
-                  controller: _notesController,
-                  decoration: const InputDecoration(labelText: 'Notes')),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    final updatedAppointment = Appointment(
-                      id: widget.appointment.id,
-                      doctorName: _doctorNameController.text,
-                      date: _dateController.text,
-                      time: _timeController.text,
-                      notes: _notesController.text,
-                    );
-                    Provider.of<AppointmentProvider>(context, listen: false)
-                        .updateAppointment(updatedAppointment);
-                    Navigator.pop(context);
-                  }
-                },
-                child: const Text('Update'),
-              ),
-            ],
+        appBar: AppBar(title: const Text('Edit Appointment')),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                    controller: _doctorNameController,
+                    decoration:
+                        const InputDecoration(labelText: 'Doctor Name')),
+                TextFormField(
+                    controller: _dateController,
+                    decoration: const InputDecoration(labelText: 'Date'),
+                    readOnly: true,
+                    onTap: () => _selectDate(context)),
+                TextFormField(
+                    controller: _timeController,
+                    decoration: const InputDecoration(labelText: 'Time'),
+                    readOnly: true,
+                    onTap: () => _selectTime(context)),
+                TextFormField(
+                    controller: _notesController,
+                    decoration: const InputDecoration(labelText: 'Notes')),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      final updatedAppointment = Appointment(
+                        id: widget.appointment.id,
+                        doctorName: _doctorNameController.text,
+                        date: _dateController.text,
+                        time: _timeController.text,
+                        notes: _notesController.text,
+                      );
+                      Provider.of<AppointmentProvider>(context, listen: false)
+                          .updateAppointment(updatedAppointment);
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: const Text('Update'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

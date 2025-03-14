@@ -28,48 +28,53 @@ class _MedicineListScreenState extends State<MedicineListScreen> {
       body: medicineProvider.medicines.isEmpty
           ? const Center(child: Text('No medicines found.'))
           : ListView.builder(
-        itemCount: medicineProvider.medicines.length,
-        itemBuilder: (context, index) {
-          final medicine = medicineProvider.medicines[index];
-          return ListTile(
-            title: Text(medicine.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Dosage: ${medicine.dosage}'),
-                Text('Frequency: ${medicine.frequency}'),
-                Text('End Date: ${medicine.endDate}', style: const TextStyle(color: Colors.red)),
-              ],
-            ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.edit, color: Colors.black),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditMedicineScreen(medicine: medicine),
+              itemCount: medicineProvider.medicines.length,
+              itemBuilder: (context, index) {
+                final medicine = medicineProvider.medicines[index];
+                return ListTile(
+                  title: Text(medicine.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Dosage: ${medicine.dosage}'),
+                      Text('Frequency: ${medicine.frequency}'),
+                      Text('End Date: ${medicine.endDate}',
+                          style: const TextStyle(color: Colors.red)),
+                    ],
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit, color: Colors.black),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  EditMedicineScreen(medicine: medicine),
+                            ),
+                          ).then((_) => medicineProvider
+                              .loadMedicines()); // Refresh after edit
+                        },
                       ),
-                    ).then((_) => medicineProvider.loadMedicines()); // Refresh after edit
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.black),
-                  onPressed: () {
-                    _confirmDelete(context, medicineProvider, medicine.id);
-                  },
-                ),
-              ],
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.black),
+                        onPressed: () {
+                          _confirmDelete(
+                              context, medicineProvider, medicine.id);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddMedicineScreen()));
+          await Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddMedicineScreen()));
           medicineProvider.loadMedicines(); // Refresh list after adding
         },
         child: const Icon(Icons.add),
@@ -77,7 +82,8 @@ class _MedicineListScreenState extends State<MedicineListScreen> {
     );
   }
 
-  void _confirmDelete(BuildContext context, MedicineProvider provider, int? medicineId) {
+  void _confirmDelete(
+      BuildContext context, MedicineProvider provider, int? medicineId) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(

@@ -29,42 +29,43 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
           return provider.appointments.isEmpty
               ? const Center(child: Text('No appointments found.'))
               : ListView.builder(
-            itemCount: provider.appointments.length,
-            itemBuilder: (context, index) {
-              final appointment = provider.appointments[index];
-              return ListTile(
-                title: Text(
-                  appointment.doctorName,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                    'Date: ${appointment.date} - Time: ${appointment.time}'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.black),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditAppointmentScreen(
-                                appointment: appointment),
+                  itemCount: provider.appointments.length,
+                  itemBuilder: (context, index) {
+                    final appointment = provider.appointments[index];
+                    return ListTile(
+                      title: Text(
+                        appointment.doctorName,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                          'Date: ${appointment.date} - Time: ${appointment.time}'),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.edit, color: Colors.black),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditAppointmentScreen(
+                                      appointment: appointment),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.black),
-                      onPressed: () {
-                        _confirmDelete(context, provider, appointment.id!);
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
+                          IconButton(
+                            icon: const Icon(Icons.delete, color: Colors.black),
+                            onPressed: () {
+                              _confirmDelete(
+                                  context, provider, appointment.id!);
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -79,12 +80,14 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
     );
   }
 
-  void _confirmDelete(BuildContext context, AppointmentProvider provider, int appointmentId) {
+  void _confirmDelete(
+      BuildContext context, AppointmentProvider provider, int appointmentId) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text('Delete Appointment?'),
-        content: const Text('Are you sure you want to delete this appointment?'),
+        content:
+            const Text('Are you sure you want to delete this appointment?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),

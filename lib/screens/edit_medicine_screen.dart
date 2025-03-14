@@ -24,7 +24,8 @@ class _EditMedicineScreenState extends State<EditMedicineScreen> {
     super.initState();
     _nameController = TextEditingController(text: widget.medicine.name);
     _dosageController = TextEditingController(text: widget.medicine.dosage);
-    _frequencyController = TextEditingController(text: widget.medicine.frequency);
+    _frequencyController =
+        TextEditingController(text: widget.medicine.frequency);
     _endDateController = TextEditingController(text: widget.medicine.endDate);
   }
 
@@ -47,7 +48,8 @@ class _EditMedicineScreenState extends State<EditMedicineScreen> {
 
     if (picked != null) {
       setState(() {
-        _endDateController.text = picked.toIso8601String().split('T').first; // Format as YYYY-MM-DD
+        _endDateController.text =
+            picked.toIso8601String().split('T').first; // Format as YYYY-MM-DD
       });
     }
   }
@@ -80,7 +82,8 @@ class _EditMedicineScreenState extends State<EditMedicineScreen> {
               TextFormField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) => value!.isEmpty ? 'Enter medicine name' : null,
+                validator: (value) =>
+                    value!.isEmpty ? 'Enter medicine name' : null,
               ),
               TextFormField(
                 controller: _dosageController,
