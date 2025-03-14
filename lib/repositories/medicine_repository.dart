@@ -26,7 +26,6 @@ class MedicineRepository {
       whereArgs: [medicine.id],
     );
   }
-
   Future<int> deleteMedicine(int id) async {
     Database db = await _databaseHelper.database;
     return await db.delete(
