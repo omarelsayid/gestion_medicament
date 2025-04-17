@@ -1,4 +1,3 @@
-
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import "package:timezone/timezone.dart" as tz;
@@ -12,14 +11,16 @@ class NotificationScheduler {
   static Future<void> initializeNotifications() async {
     // Initialize timezones
     tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation('Africa/Casablanca')); // or your desired location
+    tz.setLocalLocation(
+        tz.getLocation('Africa/Casablanca')); // or your desired location
 
     // Android settings
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
     // Platform settings
-    const InitializationSettings initializationSettings = InitializationSettings(
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
       android: initializationSettingsAndroid,
     );
 
@@ -50,6 +51,7 @@ class NotificationScheduler {
     }
 
     await _notificationsPlugin.zonedSchedule(
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       id,
       title,
       body,
@@ -63,9 +65,8 @@ class NotificationScheduler {
           priority: Priority.high,
         ),
       ),
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time, // Only if repeating daily at same time
+      matchDateTimeComponents:
+          DateTimeComponents.time, // Only if repeating daily at same time
     );
   }
 

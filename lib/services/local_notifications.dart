@@ -59,13 +59,12 @@ class NotificationHelper {
     final tz.TZDateTime tzTime = tz.TZDateTime.from(scheduledTime, tz.local);
 
     await _notificationsPlugin.zonedSchedule(
+      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       tzTime.millisecondsSinceEpoch ~/ 1000,
       title,
       body,
       tzTime,
       details,
-      androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
