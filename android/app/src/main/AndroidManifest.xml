@@ -1,4 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.gestion_medicament">
 
     <!-- 1. Permissions -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -7,11 +10,11 @@
         android:minSdkVersion="34"/>
 
     <application
-        android:label="gestion_medicament"
         android:name="${applicationName}"
+        android:label="gestion_medicament"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- Your existing MainActivity -->
+        <!-- Main launch activity -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -22,26 +25,27 @@
             android:windowSoftInputMode="adjustResize">
             <meta-data
                 android:name="io.flutter.embedding.android.NormalTheme"
-                android:resource="@style/NormalTheme" />
+                android:resource="@style/NormalTheme"/>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <!-- Flutter embedding meta-data -->
+        <!-- Flutter embedding metadata -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
+            android:value="2"/>
 
-        <!-- 2. Override the background‐service entry -->
+        <!-- 2. Override conflicting exported flag -->
         <service
             android:name="id.flutter.flutter_background_service.BackgroundService"
             android:exported="false"
+            tools:replace="android:exported"
             android:foregroundServiceType="dataSync|connectedDevice"/>
     </application>
 
-    <!-- Required for PROCESS_TEXT queries (unchanged) -->
+    <!-- Required for PROCESS_TEXT queries -->
     <queries>
         <intent>
             <action android:name="android.intent.action.PROCESS_TEXT"/>
